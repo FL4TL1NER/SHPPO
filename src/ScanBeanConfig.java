@@ -1,8 +1,8 @@
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.*;
 
 @Configuration
+@EnableAspectJAutoProxy(proxyTargetClass = true)
+@ComponentScan(".")
 public class ScanBeanConfig {
     @Bean
     @Scope("singleton")
@@ -58,5 +58,10 @@ public class ScanBeanConfig {
     public StateRule fromair()
     {
         return new StateRule("stand",new EventGVarChange("jump","false"));
+    }
+    @Bean
+    public LoggingAspect myLoggingAspect()
+    {
+        return new LoggingAspect();
     }
 }
